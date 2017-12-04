@@ -1,0 +1,19 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     struct TreeNode *left;
+ *     struct TreeNode *right;
+ * };
+ */
+int helper(struct TreeNode* root, int sum){
+    if(!root)       return 0;
+    /* if the node is not a leaf node*/
+    if(sum == root->val)    return 1 + helper(root->left, sum - root->val) + helper(root->right, sum - root->val);
+    return helper(root->left, sum - root->val) + helper(root->right, sum - root->val);
+}
+
+int pathSum(struct TreeNode* root, int sum) {
+    if(!root)   return 0;
+    return helper(root, sum) + pathSum(root->left, sum) + pathSum(root->right, sum);
+}
